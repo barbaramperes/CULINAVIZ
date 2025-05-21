@@ -1,0 +1,106 @@
+[
+  {
+    "cuisine": "USA",
+    "count": 16118
+  },
+  {
+    "cuisine": "Italy",
+    "count": 7504
+  },
+  {
+    "cuisine": "Indian Subcontinent",
+    "count": 4058
+  },
+  {
+    "cuisine": "Mexico",
+    "count": 3138
+  },
+  {
+    "cuisine": "France",
+    "count": 2703
+  },
+  {
+    "cuisine": "Canada",
+    "count": 1112
+  },
+  {
+    "cuisine": "Caribbean",
+    "count": 1103
+  },
+  {
+    "cuisine": "British Isles",
+    "count": 1075
+  },
+  {
+    "cuisine": "Middle East",
+    "count": 993
+  },
+  {
+    "cuisine": "China",
+    "count": 941
+  },
+  {
+    "cuisine": "Greece",
+    "count": 934
+  },
+  {
+    "cuisine": "Spain",
+    "count": 816
+  },
+  {
+    "cuisine": "Thailand",
+    "count": 667
+  },
+  {
+    "cuisine": "Africa",
+    "count": 651
+  },
+  {
+    "cuisine": "South East Asia",
+    "count": 611
+  },
+  {
+    "cuisine": "Japan",
+    "count": 580
+  },
+  {
+    "cuisine": "Eastern Europe",
+    "count": 565
+  },
+  {
+    "cuisine": "Australia & NZ",
+    "count": 494
+  },
+  {
+    "cuisine": "DACH Countries",
+    "count": 487
+  },
+  {
+    "cuisine": "Scandinavia",
+    "count": 404
+  },
+  {
+    "cuisine": "South America",
+    "count": 310
+  },
+  {
+    "cuisine": "Korea",
+    "count": 301
+  },
+  {
+    "cuisine": "Misc.: Portugal",
+    "count": 138
+  },
+  {
+    "cuisine": "Misc.: Dutch",
+    "count": 40
+  },
+  {
+    "cuisine": "Misc.: Belgian",
+    "count": 15
+  },
+  {
+    "cuisine": "Misc.: Central America",
+    "count": 14
+  }
+]

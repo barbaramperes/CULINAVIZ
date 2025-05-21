@@ -1,0 +1,12 @@
+/* Custom styles to override default settings */
+
+/* Change scrollUp button to orange-red (#e74c3c) */
+#scrollUp:before {
+    background: #e74c3c !important;
+    /* Use !important to override any existing styles */
+}
+
+/* Also change hover state if needed */
+#scrollUp:hover:before {
+    background: #e74c3c !important;
+}
