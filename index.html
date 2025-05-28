@@ -394,38 +394,26 @@
         }
 
         /* Estilos modernos para mapa e visualizações */
-        .tooltip-map {
-            /* Base styles for when not active - these are mostly for fallback or direct class use */
-            position: fixed;
-            /* Changed from absolute for better cross-context behavior */
-            background: rgba(40, 40, 40, 0.9);
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 13px;
-            pointer-events: none;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-            /* High z-index */
-            display: none;
-            /* Initially hidden */
-        }
+        #tooltip-map {
+  position: fixed;              /* para usar pageX/pageY corretamente */
+  display: none;                /* escondido por omissão */
+  background: rgba(40,40,40,0.9);
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 13px;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  z-index: 10000;
+}
+#tooltip-map.active {
+  display: block !important;
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
 
-        .tooltip-map.active {
-            opacity: 1 !important;
-            /* Ensure it overrides inline if necessary */
-            transform: scale(1) !important;
-            display: block !important;
-            visibility: visible !important;
-            /* Ensure it's visible */
-            /* backdrop-filter: blur(8px); /* Keep if you like this effect */
-            /* -webkit-backdrop-filter: blur(8px); */
-            /* background: rgba(40, 40, 40, 0.85); /* Already set in .tooltip-map */
-            /* border: 1px solid rgba(255, 255, 255, 0.1); */
-        }
 
         /* Estilos refinados para itens da legenda */
         .legend-item {
@@ -446,7 +434,7 @@
             background-color: #f0f4f8;
             transform: translateX(2px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-            border-left-color: #e74c3c;
+            border-left-color: #000000;
         }
 
         .legend-item.inactive {
@@ -566,7 +554,7 @@
 
         /* Estilização dos botões */
         #playPauseBtn {
-            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            background: linear-gradient(145deg, #111111, #111111);
             color: white;
             border: none;
             border-radius: 50%;
@@ -671,90 +659,10 @@
             filter: brightness(1.05);
         }
 
-        #tooltip-map {
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-            position: absolute;
-            background: rgba(40, 40, 40, 0.9);
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 13px;
-            pointer-events: none;
-            opacity: 0;
-            transform: scale(0.95);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-        }
 
-        /* Tooltip for the map */
-        #tooltip-map {
-            position: fixed;
-            /* Use fixed for consistent positioning relative to viewport */
-            background: rgba(40, 40, 40, 0.9);
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 13px;
-            pointer-events: none;
-            /* Allows clicks to pass through to map elements */
-            opacity: 0;
-            /* Start hidden */
-            transform: scale(0.95);
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            z-index: 10000;
-            /* Ensure it's above other elements, increased from 9999 */
-            display: none;
-            /* Start hidden */
-        }
+       
 
-        #tooltip-map.active {
-            opacity: 1;
-            transform: scale(1);
-            display: block;
-            /* Show when active */
-            visibility: visible;
-        }
-
-        /* Tooltip for the map - updated for light theme */
-        #tooltip-map.tooltip {
-            position: fixed;
-            background: rgba(255, 255, 255, 0.98);
-            color: #333;
-            padding: 10px 15px;
-            /* Adjusted padding slightly from bubble chart's 12px 15px */
-            border-radius: 6px;
-            font-size: 13px;
-            /* Consistent with previous map tooltip */
-            font-family: 'Open Sans', sans-serif;
-            pointer-events: none;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-            z-index: 10000;
-            display: none;
-            max-width: 280px;
-            /* From bubble chart tooltip */
-            line-height: 1.5em;
-            /* From bubble chart tooltip */
-            border: none;
-            /* From bubble chart tooltip */
-        }
-
-        #tooltip-map.tooltip.active {
-            opacity: 1;
-            transform: scale(1);
-            display: block;
-            visibility: visible;
-        }
-
-        #tooltip-map.tooltip strong {
-            color: #111;
-            /* For strong tags within this tooltip */
-            font-weight: 600;
-        }
-
+    
         /* Estilos da legenda removidos e substituídos pela versão atualizada abaixo */
 
         #bubble-viz .border-solid-bubble {
@@ -921,7 +829,7 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            border: 3px solid #e74c3c;
+            border: 3px solid #111111;
             margin-top: -6px;
             cursor: pointer;
             transition: box-shadow 0.2s;
@@ -932,7 +840,7 @@
         }
 
         .custom-slider::-ms-fill-lower {
-            background: #e74c3c;
+            background: #111111;
             border-radius: 8px;
         }
 
@@ -947,7 +855,7 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            border: 3px solid #e74c3c;
+            border: 3px solid #111111;
             cursor: pointer;
         }
 
@@ -964,7 +872,7 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            border: 3px solid #e74c3c;
+            border: 3px solid #111111;
             cursor: pointer;
         }
 
@@ -977,7 +885,7 @@
         }
 
         .custom-slider:focus::-ms-fill-lower {
-            background: #e74c3c;
+            background: #111111;
         }
 
         .custom-slider:focus::-ms-fill-upper {
@@ -1008,7 +916,7 @@
         .custom-slider-progress {
             position: absolute;
             height: 16px;
-            background: #e74c3c;
+            background: #111111;
             border-radius: 8px;
             top: 0;
             left: 0;
@@ -1029,7 +937,7 @@
         input[type="range"].custom-slider::-webkit-slider-runnable-track {
             width: 100%;
             height: 16px;
-            background: #e74c3c;
+            background: #111111;
             border-radius: 8px;
         }
 
@@ -1041,7 +949,7 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            border: 3px solid #e74c3c;
+            border: 3px solid #111111;
             margin-top: -6px;
             cursor: pointer;
             transition: box-shadow 0.2s;
@@ -1054,12 +962,12 @@
         }
 
         input[type="range"].custom-slider::-ms-fill-lower {
-            background: #e74c3c;
+            background: #111111;
             border-radius: 8px;
         }
 
         input[type="range"].custom-slider::-ms-fill-upper {
-            background: #e74c3c;
+            background: #111111;
             border-radius: 8px;
         }
 
@@ -1069,14 +977,14 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            border: 3px solid #e74c3c;
+            border: 3px solid #111111;
             cursor: pointer;
         }
 
         input[type="range"].custom-slider::-moz-range-track {
             width: 100%;
             height: 16px;
-            background: #e74c3c;
+            background: #111111;
             border-radius: 8px;
         }
 
@@ -1086,7 +994,7 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-            border: 3px solid #e74c3c;
+            border: 3px solid #111111;
             cursor: pointer;
         }
 
@@ -1099,11 +1007,11 @@
         }
 
         input[type="range"].custom-slider:focus::-ms-fill-lower {
-            background: #e74c3c;
+            background: #111111;
         }
 
         input[type="range"].custom-slider:focus::-ms-fill-upper {
-            background: #e74c3c;
+            background: #111111;
         }
 
         input[type="range"].custom-slider::-webkit-slider-thumb:hover {
@@ -1171,6 +1079,8 @@
                                 <li><a href="#globe-section">Globe Map</a></li>
                                 <li><a href="#bubble-viz">Ingredient Hierarchy</a></li>
                                 <li><a href="#radial-chart-section">Cuisine Connections</a></li>
+                                <li><a href="#chord-section">Cuisine Relationships</a></li>
+                                <li><a href="#heatmap-section">Heatmap</a></li>
                                 <li><a href="#team-section">Team</a></li>
                             </ul>
                         </nav>
@@ -1187,6 +1097,8 @@
                                 <li><a href="#bubble-viz">Ingredient Hierarchy</a></li>
                                 <li><a href="#interactive-map-section">Restaurants Map</a></li>
                                 <li><a href="#radial-chart-section">Cuisine Connections</a></li>
+                                <li><a href="#chord-section">Cuisine Relationships</a></li>
+                                <li><a href="#heatmap-section">Heatmap</a></li>
                                 <li><a href="#team-section">Team</a></li>
                             </ul>
                         </nav>
@@ -1298,13 +1210,13 @@
                             <!-- Year display above slider -->
                             <h3
                                 style="margin: 0 0 10px 0; font-size: 18px; font-weight: 500; color: #333; text-align: center;">
-                                Year: <span id="yearDisplay" style="font-weight:600; color:#e74c3c;">2015</span>
+                                Year: <span id="yearDisplay" style="font-weight:600; color:#111111;">2015</span>
                             </h3>
 
                             <!-- Slider and controls on same line, perfeitamente alinhados -->
                             <div style="display: flex; align-items: center; justify-content: center; margin-top: 5px;">
                                 <button id="playPauseBtn" class="play-btn"
-                                    style="width:30px; height:30px; margin-right:12px; border-radius:50%; background: linear-gradient(145deg, #e74c3c, #c0392b); border:none; color:white; cursor:pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; align-self: center; margin-top: 4px;">
+                                    style="width:30px; height:30px; margin-right:12px; border-radius:50%; background: linear-gradient(145deg, #111111, #111111); border:none; color:white; cursor:pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; align-self: center; margin-top: 4px;">
                                     <i class="fa fa-play" style="font-size:12px;"></i>
                                 </button>
 
@@ -1353,12 +1265,10 @@
                                         </filter>
                                     </defs>
                                 </svg>
-                                <div id="tooltip-map" class="tooltip"
-                                    style="position: absolute; z-index: 1000; background-color: rgba(40, 40, 40, 0.9); color: white; padding: 10px; border-radius: 6px; pointer-events: none; opacity: 0; transition: opacity 0.2s ease-in-out; box-shadow: 0 3px 14px rgba(0,0,0,0.25);">
-                                </div>
-
+                           
 
                             </div>
+                            <div id="tooltip-map"></div>
 
                             <!-- Cuisine Types legend positioned to show full text -->
                             <div class="legend"
@@ -1387,22 +1297,12 @@
                         </div>
                     </div>
                 </div>
+ 
+
             </section>
 
             <style>
-                /* Estilos modernos para mapa e visualizações */
-                .tooltip-map.active,
-                #tooltip-map.active {
-                    opacity: 1 !important;
-                    transform: scale(1) !important;
-                    backdrop-filter: blur(8px);
-                    -webkit-backdrop-filter: blur(8px);
-                    background: rgba(40, 40, 40, 0.85) !important;
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    display: block !important;
-                    z-index: 1000;
-                    visibility: visible !important;
-                }
+         
 
                 /* Estilos refinados para itens da legenda */
                 .legend-item {
@@ -1423,7 +1323,7 @@
                     background-color: #f0f4f8;
                     transform: translateX(2px);
                     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-                    border-left-color: #e74c3c;
+                    border-left-color: #111111;
                 }
 
                 .legend-item.inactive {
@@ -1547,7 +1447,7 @@
 
                 /* Estilização dos botões */
                 #playPauseBtn {
-                    background: linear-gradient(145deg, #e74c3c, #c0392b);
+                    background: linear-gradient(145deg, #111111, #111111);
                     color: white;
                     border: none;
                     border-radius: 50%;
@@ -1652,20 +1552,6 @@
                     filter: brightness(1.05);
                 }
 
-                #tooltip-map {
-                    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-                    position: absolute;
-                    background: rgba(40, 40, 40, 0.9);
-                    color: #fff;
-                    padding: 10px 15px;
-                    border-radius: 6px;
-                    font-size: 13px;
-                    pointer-events: none;
-                    opacity: 0;
-                    transform: scale(0.95);
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-                    z-index: 9999;
-                }
             </style>
 
             <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -1704,7 +1590,7 @@
                         .attr("stroke-width", 0.5);
 
                     // Direct DOM reference instead of D3 selection
-                    const tooltipElement = document.getElementById("tooltip-map");
+                    const tooltipEl = document.getElementById("tooltip-map");
                     const tooltip = d3.select("#tooltip-map");
 
                     // Define broader cuisine categories mapping
@@ -1765,20 +1651,37 @@
                     let cuisineColors = {};
                     let sortedCuisineNames = []; // Will store sorted broad cuisine names
 
-                    const warmColorPalette = [
-                        "#B71C1C", // Dark Red
-                        "#C62828",
-                        "#D32F2F",
-                        "#E53935", // Red
-                        "#F4511E", // Deep Orange
-                        "#FB8C00", // Orange
-                        "#FFB300", // Amber
-                        "#FDD835", // Yellow
-                        "#FFEE58",
-                        "#FFF176", // Light Yellow
-                        "#FFF59D",
-                        "#FFF9C4"  // Very Light Yellow
-                    ];
+                //    const warmColorPalette = [
+                 //       "#B71C1C", // Dark Red
+                //        "#C62828",
+                //        "#D32F2F",
+                //        "#E53935", // Red
+                //        "#F4511E", // Deep Orange
+                  //      "#FB8C00", // Orange
+                  //      "#FFB300", // Amber
+                 //       "#FDD835", // Yellow
+                 //       "#FFEE58",
+                 //       "#FFF176", // Light Yellow
+                 //       "#FFF59D",
+                 //       "#FFF9C4"  // Very Light Yellow
+                  //  ];
+                 const warmColorPalette = [
+// nova paleta outonal,  twelve tons quentes bem distintos
+
+  "#FFB300", // Amber
+  "#FF8F00", // Dark Amber
+  "#E65100", // Deep Orange
+  "#BF360C", // Brownish Orange
+  "#795548", // Brown
+  "#6D4C41", // Dark Brown
+  "#A1887F", // Taupe
+  "#F57C00", // Orange
+  "#F4511E", // Deep Sienna
+  "#D84315", // Red-Orange
+  "#C62828", // Red
+  "#AD1457"  // Magenta-Red
+];
+
 
                     let activeCuisines = new Set();
                     const data = [];
@@ -1981,19 +1884,12 @@
                                     .attr("pointer-events", isActiveAndMatches ? "all" : "none");
                             });
                     }
-
+          
                     function updateMap(year) {
-                        // Log to verify year filtering
                         console.log(`Updating map for year: ${year}`);
-
-                        // Make updateMap globally available immediately
                         window.updateMap = updateMap;
 
-                        // Filter restaurants for the selected year
                         const filteredData = data.filter(d => d.year === year);
-                        console.log(`Found ${filteredData.length} restaurants for year ${year}`);
-
-                        // Clear existing bubbles before drawing new ones
                         g.selectAll("circle.restaurant-bubble").remove();
 
                         const bubbles = g.selectAll("circle.restaurant-bubble")
@@ -2005,122 +1901,68 @@
                             .attr("cx", d => projection([d.lng, d.lat])[0])
                             .attr("cy", d => projection([d.lng, d.lat])[1])
                             .attr("r", 0)
+                            .attr("fill", d => cuisineColors[d.broadCuisine] || "#999")
                             .attr("stroke", "#fff")
                             .attr("stroke-width", 1)
-                            .attr("fill", d => cuisineColors[d.broadCuisine] || "#999")
+                            .attr("filter", "url(#glow)")
                             .style("cursor", "pointer")
                             .style("opacity", 0)
-                            .attr("filter", "url(#glow)")
-                            .on("mouseover", function (event, d) {
-                                if (!activeCuisines.has(d.broadCuisine)) return;
-                                let countryMatch = true;
-                                if (selectedCountryFeature) {
-                                    countryMatch = d3.geoContains(selectedCountryFeature, [d.lng, d.lat]);
-                                }
-                                if (!countryMatch) return;
+                            .on("mouseover", (event,d) => {
+  if (!activeCuisines.has(d.broadCuisine)) return;
+  if (selectedCountryFeature && !d3.geoContains(selectedCountryFeature,[d.lng,d.lat])) return;
 
-                                // Highlight the bubble
-                                d3.select(this)
-                                    .transition()
-                                    .duration(150)
-                                    .attr("r", 9)
-                                    .attr("stroke-width", 2.5)
-                                    .attr("filter", "url(#glow-highlight)");
+  d3.select(event.currentTarget)
+    .transition().duration(150)
+      .attr("r", 9)
+      .attr("filter","url(#glow-highlight)");
 
-                                // Using DOM manipulation for the tooltip with forced display
-                                const tooltipEl = document.getElementById("tooltip-map");
-                                if (tooltipEl) {
-                                    // Build rich tooltip content
-                                    tooltipEl.innerHTML = `
-                                        <div style="text-align: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 6px; margin-bottom: 6px;">
-                                            <strong style="font-size: 14px; color: #fff;">${d.restaurant}</strong>
-                                        </div>
-                                        <div style="display: flex; flex-direction: column; align-items: center;">
-                                            <div style="margin-bottom: 4px; display: flex; align-items: center;">
-                                                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: ${cuisineColors[d.broadCuisine] || "#999"}; margin-right: 6px;"></span>
-                                                <span style="font-size: 12px; color: #fff;">${d.cuisine || "Unknown cuisine"}</span>
-                                            </div>
-                                            <span style="font-size: 11px; color: rgba(255,255,255,0.7);">Rank: #${d.rank} (${d.year})</span>
-                                            <span style="font-size: 11px; color: rgba(255,255,255,0.7);">${d.location}, ${d.country}</span>
-                                        </div>
-                                    `;
+  tooltipEl.innerHTML = `
+    <strong style="font-size:14px;">${d.restaurant}</strong><br/>
+    Rank #${d.rank} (${d.year})<br/>
+    <em style="font-size:12px;">${d.location}, ${d.country}</em>
+  `;
+  // usa position:fixed + pageX/Y
+  tooltipEl.style.left    = (event.pageX + 10) + "px";
+  tooltipEl.style.top     = (event.pageY - 30) + "px";
+  tooltipEl.style.display = "block";
+  tooltipEl.classList.add("active");
+})
+.on("mousemove", event => {
+  tooltipEl.style.left = (event.pageX + 10) + "px";
+  tooltipEl.style.top  = (event.pageY - 30) + "px";
+})
+.on("mouseout", (event,d) => {
+  d3.select(event.currentTarget)
+    .transition().duration(150)
+      .attr("r", 6)
+      .attr("filter","url(#glow)");
 
-                                    // Position and show the tooltip
-                                    tooltipEl.style.left = (event.pageX + 15) + "px";
-                                    tooltipEl.style.top = (event.pageY - 15) + "px";
-                                    tooltipEl.style.opacity = "1";
-                                    tooltipEl.style.display = "block";
-                                    tooltipEl.style.visibility = "visible";
-                                    tooltipEl.style.position = "absolute";
-                                    tooltipEl.style.pointerEvents = "none";
-                                    tooltipEl.style.zIndex = "9999";
+  // esconde o tooltip
+  tooltipEl.classList.remove("active");
+  tooltipEl.style.display = "none";
+})
 
-                                    // Also add the active class
-                                    tooltipEl.classList.add("active");
 
-                                    console.log("Tooltip shown for:", d.restaurant);
-                                }
-                            })
-                            .on("mousemove", function (event) {
-                                const tooltipEl = document.getElementById("tooltip-map");
-                                if (tooltipEl && tooltipEl.style.opacity !== "0") {
-                                    tooltipEl.style.left = (event.pageX + 15) + "px";
-                                    tooltipEl.style.top = (event.pageY - 15) + "px";
-                                }
-                            })
-                            .on("mouseout", function (event, d) { // Added d to access data if needed
-                                const cuisineIsActive = activeCuisines.has(d.broadCuisine);
-                                let countryMatch = true;
-                                if (selectedCountryFeature) {
-                                    countryMatch = d3.geoContains(selectedCountryFeature, [d.lng, d.lat]);
-                                }
-                                const isActiveAndMatches = cuisineIsActive && countryMatch;
-                                const targetRadius = isActiveAndMatches ? 6 : 2;
-                                const targetFilter = isActiveAndMatches ? "url(#glow)" : "none";
 
-                                d3.select(this)
-                                    .transition()
-                                    .duration(150)
-                                    .attr("r", targetRadius)
-                                    .attr("stroke-width", 1)
-                                    .attr("filter", targetFilter);
 
-                                const tooltipEl = document.getElementById("tooltip-map");
-                                if (tooltipEl) {
-                                    tooltipEl.classList.remove("active");
-                                    tooltipEl.style.opacity = "0";
-                                    tooltipEl.style.display = "none";
-                                    tooltipEl.style.visibility = "hidden";
-                                }
-                            })
-                            .transition()
-                            .duration(500)
-                            .attr("r", 6)
-                            .style("opacity", 0.9);
-
-                        bubbles.transition()
-                            .duration(500)
+                        bubbles.transition().duration(500)
                             .attr("cx", d => projection([d.lng, d.lat])[0])
                             .attr("cy", d => projection([d.lng, d.lat])[1])
-                            .attr("r", 6)
                             .style("opacity", d => {
-                                const cuisineIsActive = activeCuisines.has(d.broadCuisine);
-                                let countryMatch = true;
-                                if (selectedCountryFeature) {
-                                    countryMatch = d3.geoContains(selectedCountryFeature, [d.lng, d.lat]);
-                                }
-                                return cuisineIsActive && countryMatch ? 0.85 : 0.1;
+                            const okCuisine = activeCuisines.has(d.broadCuisine);
+                            const okCountry = !selectedCountryFeature || d3.geoContains(selectedCountryFeature, [d.lng, d.lat]);
+                            return (okCuisine && okCountry) ? 0.9 : 0.1;
                             });
 
                         bubbles.exit()
-                            .transition()
-                            .duration(300)
+                            .transition().duration(300)
                             .attr("r", 0)
                             .style("opacity", 0)
                             .remove();
 
                         filterBubbles();
-                    }
+                        }
+
 
                     function createLegend() {
                         console.log("Creating legend...");
@@ -3965,16 +3807,129 @@
                                     style="position: absolute; text-align: center; padding: 8px 12px; background: white; border: 1px solid #ccc; border-radius: 4px; pointer-events: none; font-size: 13px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); opacity: 0;">
                                 </div>
                             </div>
-
-                            <!-- Legenda -->
-                            <div
-                                style="position: absolute; top: 20px; right: 20px; background: white; padding: 14px; border-radius: 8px; color: #333; font-size: 12px; z-index: 10; max-width: 200px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                                <h3
-                                    style="margin-top:0; font-size:18px; font-weight:600; color:#111; border-bottom:1px solid #eee; padding-bottom:6px;">
-                                    Ingredient Categories
-                                </h3>
-                                <div id="radial-legend"></div>
-                            </div>
+  <!-- Replaced Ingredient Categories -->
+  <div id="category-labels"
+  style="position: absolute; top: 20px; right: 20px; background: white; padding: 14px; border-radius: 8px; color: rgb(51, 51, 51); font-size: 10px; z-index: 10; box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px; font-family: 'Open Sans', sans-serif; max-width: 240px; overflow: visible;">
+  <h3
+      style="margin-top: 0px; font-size: 13px; font-weight: 600; color: rgb(17, 17, 17); border-bottom: 1px solid rgb(238, 238, 238); padding-bottom: 6px; margin-bottom: 12px; text-align: center; font-family: 'Open Sans', sans-serif;">
+      Ingredient Categories</h3>
+  <div style="display: flex; flex-direction: column; gap: 4px;">
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(176, 190, 197); cursor: pointer;"
+          onclick="showNodeInfo('Additive', 'rgb(176, 190, 197)')">
+          <span style="font-size: 12px;">⚗️</span>
+          <span>Additive</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(76, 175, 80); cursor: pointer;"
+          onclick="showNodeInfo('Vegetable', 'rgb(76, 175, 80)')">
+          <span style="font-size: 12px;">🥦</span>
+          <span>Vegetable</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(229, 57, 53); cursor: pointer;"
+          onclick="showNodeInfo('Spice', 'rgb(229, 57, 53)')">
+          <span style="font-size: 12px;">🌶️</span>
+          <span>Spice</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(255, 213, 79); cursor: pointer;"
+          onclick="showNodeInfo('Dairy', 'rgb(255, 213, 79)')">
+          <span style="font-size: 12px;">🧀</span>
+          <span>Dairy</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(244, 67, 54); cursor: pointer;"
+          onclick="showNodeInfo('Fruit', 'rgb(244, 67, 54)')">
+          <span style="font-size: 12px;">🍎</span>
+          <span>Fruit</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(139, 195, 74); cursor: pointer;"
+          onclick="showNodeInfo('Plant', 'rgb(139, 195, 74)')">
+          <span style="font-size: 12px;">🌱</span>
+          <span>Plant</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(121, 85, 72); cursor: pointer;"
+          onclick="showNodeInfo('Meat', 'rgb(121, 85, 72)')">
+          <span style="font-size: 12px;">🍖</span>
+          <span>Meat</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(156, 204, 101); cursor: pointer;"
+          onclick="showNodeInfo('Herb', 'rgb(156, 204, 101)')">
+          <span style="font-size: 12px;">🌿</span>
+          <span>Herb</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(255, 193, 7); cursor: pointer;"
+          onclick="showNodeInfo('Cereal', 'rgb(255, 193, 7)')">
+          <span style="font-size: 12px;">🌾</span>
+          <span>Cereal</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(205, 127, 50); cursor: pointer;"
+          onclick="showNodeInfo('Nuts & Seeds', 'rgb(205, 127, 50)')">
+          <span style="font-size: 12px;">🥜</span>
+          <span>Nuts & Seeds</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(136, 14, 79); cursor: pointer;"
+          onclick="showNodeInfo('Beverage Alcoholic', 'rgb(136, 14, 79)')">
+          <span style="font-size: 12px;">🍷</span>
+          <span>Beverage Alcoholic</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(255, 112, 67); cursor: pointer;"
+          onclick="showNodeInfo('Beverage', 'rgb(255, 112, 67)')">
+          <span style="font-size: 12px;">🧃</span>
+          <span>Beverage</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(255, 183, 77); cursor: pointer;"
+          onclick="showNodeInfo('Bakery', 'rgb(255, 183, 77)')">
+          <span style="font-size: 12px;">🥐</span>
+          <span>Bakery</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(255, 138, 101); cursor: pointer;"
+          onclick="showNodeInfo('Seafood', 'rgb(255, 138, 101)')">
+          <span style="font-size: 12px;">🦐</span>
+          <span>Seafood</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(255, 235, 59); cursor: pointer;"
+          onclick="showNodeInfo('Maize', 'rgb(255, 235, 59)')">
+          <span style="font-size: 12px;">🌽</span>
+          <span>Maize</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(231, 76, 60); cursor: pointer;"
+          onclick="showNodeInfo('Fungus', 'rgb(231, 76, 60)')">
+          <span style="font-size: 12px;">🍄</span>
+          <span>Fungus</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(33, 150, 243); cursor: pointer;"
+          onclick="showNodeInfo('Fish', 'rgb(33, 150, 243)')">
+          <span style="font-size: 12px;">🐟</span>
+          <span>Fish</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(179, 229, 252); cursor: pointer;"
+          onclick="showNodeInfo('Essential Oil', 'rgb(179, 229, 252)')">
+          <span style="font-size: 12px;">🫧</span>
+          <span>Essential Oil</span>
+      </div>
+      <div class="category-item"
+          style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgb(51, 51, 51); background: rgb(245, 245, 245); padding: 3px 8px; border-radius: 16px; margin: 2px; border-left: 3px solid rgb(253, 216, 53); cursor: pointer;"
+          onclick="showNodeInfo('Flower', 'rgb(253, 216, 53)')">
+          <span style="font-size: 12px;">🌻</span>
+          <span>Flower</span>
+      </div>
+  </div>
+</div>
                         </div>
                     </div>
                 </div>
@@ -4156,9 +4111,298 @@
                         });
                 });
             </script>
+<!-- Chord Diagram Section -->
+<section id="chord-section" class="scrollto clearfix" style="background:#FFFFFF; padding:60px 0;">
+    <div class="row clearfix">
+      <div class="section-heading" style="text-align: center; max-width: 900px; margin: 0 auto 30px auto;">
+        <h3 style="color:#888">EXPLORE</h3>
+        <h2 class="section-title" style="color:#333333">Cuisine Relationships</h2>
+        <p class="section-subtitle" style="color:#666666">
+          Discover how different cuisines share common ingredients.
+        </p>
+      </div>
+  
+      <div style="display: flex; width: 100%; max-width: 1200px; margin: 0 auto; justify-content: center;">
+        <!-- removido position:relative daqui -->
+        <div id="chord-container" style="width: 100%; height: 600px;">
+          <svg id="chord-svg" style="width: 100%; height: 100%;"></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Tooltip colocado fora, com posição fixa -->
+  <div id="chord-tooltip"
+       style="
+         position: fixed;
+         text-align: center;
+         padding: 8px 12px;
+         background: rgba(0,0,0,0.9);
+         color: white;
+         border-radius: 4px;
+         pointer-events: none;
+         font-size: 13px;
+         opacity: 0;
+         z-index: 1000;
+         box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+       ">
+  </div>
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tooltip = d3.select("#chord-tooltip");
+  
+    function showTooltip(e, html) {
+      tooltip.html(html)
+        .style("left",  (e.clientX + 10) + "px")
+        .style("top",   (e.clientY - 28) + "px")
+        .transition().duration(200).style("opacity", 1);
+    }
+    function hideTooltip() {
+      tooltip.transition().duration(200).style("opacity", 0);
+    }
+  
+    function createChord() {
+      const container = d3.select("#chord-svg"),
+            width     = container.node().getBoundingClientRect().width,
+            height    = 600,
+            outerR    = Math.min(width, height)/2 - 40,
+            innerR    = outerR - 30,
+            cuisines  = ["Italian","French","American","Mexican","Chinese","Japanese","Indian","Thai"],
+            matrix    = [
+              [0,235,187,142, 98, 65, 87, 72],
+              [235,0,156,113, 89, 78,103, 92],
+              [187,156,0,203,117, 92, 78, 83],
+              [142,113,203, 0,106, 85,134,145],
+              [98, 89,117,106, 0,218,165,187],
+              [65, 78, 92, 85,218,  0,132,156],
+              [87,103, 78,134,165,132,  0,203],
+              [72, 92, 83,145,187,156,203,  0]
+            ];
+  
+      container.selectAll("*").remove();
+      const svg = container
+        .attr("width", width)
+        .attr("height", height);
+      const g = svg.append("g")
+        .attr("transform", `translate(${width/2},${height/2})`);
+  
+      const warm = ["#FF6F61","#FF9A76","#FFC75F","#FFAB3C","#F9F871","#F06292","#D7263D","#EF476F"];
+  
+      const chordGen = d3.chord().padAngle(0.05).sortSubgroups(d3.descending),
+            chords   = chordGen(matrix),
+            color    = d3.scaleOrdinal().domain(d3.range(cuisines.length)).range(warm),
+            arc      = d3.arc().innerRadius(innerR).outerRadius(outerR),
+            ribbon   = d3.ribbon().radius(innerR);
+  
+      // grupos
+      const group = g.selectAll(".group")
+        .data(chords.groups)
+        .enter().append("g")
+        .attr("class","group");
+  
+      group.append("path")
+        .attr("d", arc)
+        .style("fill", d => color(d.index))
+        .style("stroke", "none")
+        .on("mouseover", (e,d) =>
+          showTooltip(e, `<strong>${cuisines[d.index]}</strong><br/>Total: ${d.value}`)
+        )
+        .on("mouseout", hideTooltip);
+  
+      group.append("text")
+        .each(d => { d.angle = (d.startAngle + d.endAngle)/2; })
+        .attr("dy",".35em")
+        .attr("transform", d => `
+          rotate(${d.angle * 180/Math.PI - 90})
+          translate(${outerR + 10})
+          ${d.angle > Math.PI ? "rotate(180)" : ""}
+        `)
+        .attr("text-anchor", d => d.angle > Math.PI ? "end" : "start")
+        .text(d => cuisines[d.index])
+        .style("fill","#888")
+        .style("font-size","12px");
+  
+      // fitas
+      g.append("g")
+        .selectAll("path")
+        .data(chords)
+        .enter().append("path")
+          .attr("class","chord")
+          .attr("d", ribbon)
+          .style("fill", d => color(d.source.index))
+          .style("stroke", "none")
+          .style("fill-opacity", 0.8)
+          .on("mouseover", (e,d) => {
+            showTooltip(e,
+              `<strong>${cuisines[d.source.index]}</strong> ↔
+               <strong>${cuisines[d.target.index]}</strong><br/>
+               Connection: ${d.source.value}`
+            );
+            d3.select(e.currentTarget)
+              .transition().duration(200)
+              .style("fill-opacity",1);
+          })
+          .on("mouseout", function() {
+            hideTooltip();
+            d3.select(this)
+              .transition().duration(200)
+              .style("fill-opacity",0.8);
+          });
+    }
+  
+    createChord();
+  });
+  </script>
+  <!-- IMPORTA O D3 -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
 
+<!-- Heatmap Section -->
+<section id="heatmap-section" class="scrollto clearfix" style="background:#FFFFFF; padding:60px 0; margin-top:40px;">
+  <div class="row clearfix">
+    <div class="section-heading" style="text-align:center; max-width:900px; margin:0 auto 30px;">
+      <h3 style="color:#888">EXPLORE</h3>
+      <h2 class="section-title" style="color:#333">Ingredients vs Cuisines Heatmap</h2>
+      <p class="section-subtitle" style="color:#666">
+        Explore the frequency of ingredient usage across different culinary traditions.<br>
+        Darker colors indicate higher usage.
+      </p>
+    </div>
+    <div style="display:flex; justify-content:center; width:100%; max-width:1200px; margin:0 auto;">
+      <div id="heatmap-container" style="position:relative; width:100%; height:600px;">
+        <svg id="heatmap-svg" style="width:100%; height:100%;"></svg>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- depois de <svg id="heatmap-svg">, coloque este script -->
 
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// 1) CRIA O TOOLTIP no body, com alto z-index
+const tooltip = d3.select("body")
+  .append("div")
+    .attr("class","viz-tooltip")
+    .style("position","absolute")
+    .style("pointer-events","none")
+    .style("padding","8px 12px")
+    .style("background","rgba(255,255,255,0.95)")
+    .style("border","1px solid rgba(0,0,0,0.1)")
+    .style("border-radius","6px")
+    .style("box-shadow","0 4px 12px rgba(0,0,0,0.15)")
+    .style("font-size","13px")
+    .style("color","#333")
+    .style("z-index","9999")
+    .style("opacity",0)
+    .style("display","none");
+
+function showTooltip(event, html) {
+  tooltip.html(html)
+    .style("left",  (event.pageX + 10) + "px")
+    .style("top",   (event.pageY + 10) + "px")
+    .style("display","block")
+    .transition().duration(150).style("opacity",1);
+}
+function hideTooltip() {
+  tooltip.transition().duration(100).style("opacity",0).on("end", () => {
+    tooltip.style("display","none");
+  });
+}
+
+// 2) Cria o heatmap
+function createHeatmap() {
+  const svg = d3.select("#heatmap-svg"),
+        fullW = svg.node().getBoundingClientRect().width,
+        fullH = 600,
+        margin = {top:50,right:80,bottom:100,left:120},
+        w = fullW - margin.left - margin.right,
+        h = fullH - margin.top - margin.bottom;
+
+  svg.attr("width", fullW).attr("height", fullH)
+     .selectAll("*").remove();
+  const g = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const cuisines = ["Italian","French","American","Mexican","Asian","Indian"];
+  const ingredients = ["tomato","onion","garlic","oil","butter","cream",
+                       "cheese","chicken","beef","rice","beans","pepper",
+                       "cumin","basil","lemon","potato"];
+  const values = [
+    [75,90,80,60,95,85,20,70,65,30,55,40,85,75,70,60],
+    [30,45,35,25,65,75,90,40,50,20,35,45,80,25,20,35],
+    [85,65,55,45,95,30,20,90,95,50,85,60,45,55,50,95],
+    [25,30,50,45,55,65,45,55,50,35,45,75,95,85,40,55],
+    [20,40,60,30,80,90,85,50,55,75,95,65,90,20,25,35],
+    [65,95,75,55,90,20,15,95,65,45,95,60,35,50,45,90]
+  ];
+
+  const x = d3.scaleBand().domain(ingredients).range([0,w]).padding(0.02);
+  const y = d3.scaleBand().domain(cuisines).range([0,h]).padding(0.02);
+  const color = d3.scaleSequential(d3.interpolateYlOrRd).domain([0,100]);
+
+  // monta array plano
+  const data = [];
+  cuisines.forEach((c,i) => ingredients.forEach((ing,j) => {
+    data.push({cuisine:c,ingredient:ing,value:values[i][j]});
+  }));
+
+  // desenha células
+  g.selectAll("rect.cell")
+    .data(data)
+    .enter().append("rect")
+      .attr("class","cell")
+      .attr("x", d => x(d.ingredient))
+      .attr("y", d => y(d.cuisine))
+      .attr("width",  x.bandwidth())
+      .attr("height", y.bandwidth())
+      .attr("fill", d => color(d.value))
+      .style("stroke","#111")
+      .style("stroke-width",2)
+    .on("mouseover", (event,d) => {
+      d3.select(event.currentTarget)
+        .transition().duration(100)
+        .style("stroke","#fff")
+        .style("stroke-width",3);
+      showTooltip(event,
+        `<strong>${d.ingredient} — ${d.cuisine}</strong><br/>` +
+        `Usage: <strong>${d.value}%</strong>`
+      );
+    })
+    .on("mousemove", (event,d) => {
+      showTooltip(event,
+        `<strong>${d.ingredient} — ${d.cuisine}</strong><br/>` +
+        `Usage: <strong>${d.value}%</strong>`
+      );
+    })
+    .on("mouseout", (event) => {
+      d3.select(event.currentTarget)
+        .transition().duration(100)
+        .style("stroke","#111")
+        .style("stroke-width",2);
+      hideTooltip();
+    });
+
+  // eixos
+  g.append("g")
+    .attr("transform", `translate(0,${h})`)
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .style("text-anchor","middle").style("fill","#888");
+
+  g.append("g")
+    .call(d3.axisLeft(y))
+    .selectAll("text")
+      .style("fill","#888");
+
+  // gradiente + legenda (igual ao anterior)...
+  // (pode copiar o seu trecho de legend aqui sem mudanças)
+}
+
+createHeatmap();
+</script>
+
+  
             <!--Team-->
             <section class="introduction scrollto text-center" id="team-section"
                 style="margin-top: 60px; margin-bottom: 60px; padding-top: 40px;">
@@ -4243,71 +4487,70 @@
                 </div>
             </section>
             <!--End Main Content Area-->
-            <!--Footer-->
-            <footer id="landing-footer" class="clearfix"
-                style="background-color: #000000; color: white; padding: 40px 0 30px; text-align: center; font-family: 'Open Sans', sans-serif; position: relative; overflow: hidden;">
+          <!--Footer-->
+    <footer id="landing-footer" class="clearfix"
+    style="background-color: #000000; color: white; padding: 40px 0 30px; text-align: center; font-family: 'Open Sans', sans-serif; position: relative; overflow: hidden;">
 
-                <div class="row clearfix" style="max-width: 960px; margin: 0 auto; position: relative; z-index: 2;">
-                    <div
-                        style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 30px;">
-                        <!-- Logo and description section -->
-                        <div style="flex: 1; min-width: 280px; margin: 10px; text-align: left;">
-                            <h3
-                                style="font-size: 24px; margin-bottom: 15px; color: #ffffff; font-weight: 600; letter-spacing: 1px;">
-                                Culinaviz</h3>
-                            <div style="width: 50px; height: 3px; background: #e74c3c; margin-bottom: 15px;"></div>
-                            <p style="font-size: 14px; line-height: 1.6; color: #ffffff; margin-bottom: 20px;">
-                                Exploring
-                                global culinary traditions through interactive visualizations.</p>
-                        </div>
+    <div class="row clearfix" style="max-width: 960px; margin: 0 auto; position: relative; z-index: 2;">
+        <div
+            style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 30px;">
+            <!-- Logo and description section -->
+            <div style="flex: 1; min-width: 280px; margin: 10px; text-align: left;">
+                <h3
+                    style="font-size: 24px; margin-bottom: 15px; color: #ffffff; font-weight: 600; letter-spacing: 1px;">
+                    Culinaviz</h3>
+                <div style="width: 50px; height: 3px; background: #ffffff; margin-bottom: 15px;"></div>
+                <p style="font-size: 14px; line-height: 1.6; color: #ffffff; margin-bottom: 20px;">
+                    Exploring
+                    global culinary traditions through interactive visualizations.</p>
+            </div>
 
-                        <!-- Contact section -->
-                        <div style="flex: 1; min-width: 280px; margin: 10px; text-align: left;">
-                            <h4 style="font-size: 18px; margin-bottom: 15px; color: #ffffff; font-weight: 600;">
-                                Contact
-                                Us</h4>
-                            <div style="width: 50px; height: 3px; background: #e74c3c; margin-bottom: 15px;"></div>
-                            <p style="font-size: 14px; line-height: 1.6; color: #ffffff; margin-bottom: 10px;">
-                                <strong>Universidade NOVA de Lisboa</strong>
-                            </p>
+            <!-- Contact section -->
+            <div style="flex: 1; min-width: 280px; margin: 10px; text-align: left;">
+                <h4 style="font-size: 18px; margin-bottom: 15px; color: #ffffff; font-weight: 600;">
+                    Contact
+                    Us</h4>
+                <div style="width: 50px; height: 3px; background: #ffffff; margin-bottom: 15px;"></div>
+                <p style="font-size: 14px; line-height: 1.6; color: #ffffff; margin-bottom: 10px;">
+                    Universidade NOVA de Lisboa
+                </p>
 
-                            <!-- Styled email list -->
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-                                <a href="mailto:20240349@novaims.unl.pt"
-                                    style="color: #ffffff; text-decoration: none; padding: 8px 10px; background-color: #e74c3c; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #e74c3c;">
-                                    <span
-                                        style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240349@novaims.unl.pt</span>
-                                </a>
-                                <a href="mailto:20240011@novaims.unl.pt"
-                                    style="color: #ffffff; text-decoration: none; padding: 8px 10px; background-color: #e74c3c; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #e74c3c;">
-                                    <span
-                                        style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240011@novaims.unl.pt</span>
-                                </a>
-                                <a href="mailto:20240441@novaims.unl.pt"
-                                    style="color: #ffffff; text-decoration: none; padding: 8px 10px; background-color: #e74c3c; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #e74c3c;">
-                                    <span
-                                        style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240441@novaims.unl.pt</span>
-                                </a>
-                                <a href="mailto:20240445@novaims.unl.pt"
-                                    style="color: #ffffff; text-decoration: none; padding: 8px 10px; background-color: #e74c3c; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #e74c3c;">
-                                    <span
-                                        style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240445@novaims.unl.pt</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Copyright section -->
-                    <div class="copyright"
-                        style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e74c3c; font-size: 13px; color: #ffffff; text-align: center;">
-                        &copy; 2024 Culinaviz <span
-                            style="display: inline-block; margin: 0 10px; font-size: 16px; color: #e74c3c;">•</span>
-                        Group 7 <span
-                            style="display: inline-block; margin: 0 10px; font-size: 16px; color: #e74c3c;">•</span>
-                        Data Visualization
-                    </div>
+                <!-- Styled email list -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                    <a href="mailto:20240349@novaims.unl.pt"
+                        style="color: #111111; text-decoration: none; padding: 8px 10px; background-color: #ffffff; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #ffffff;">
+                        <span
+                            style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240349@novaims.unl.pt</span>
+                    </a>
+                    <a href="mailto:20240011@novaims.unl.pt"
+                        style="color: #111111; text-decoration: none; padding: 8px 10px; background-color: #ffffff; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #ffffff;">
+                        <span
+                            style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240011@novaims.unl.pt</span>
+                    </a>
+                    <a href="mailto:20240441@novaims.unl.pt"
+                        style="color: #111111; text-decoration: none; padding: 8px 10px; background-color: #ffffff; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #ffffff;">
+                        <span
+                            style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240441@novaims.unl.pt</span>
+                    </a>
+                    <a href="mailto:20240445@novaims.unl.pt"
+                        style="color: #111111; text-decoration: none; padding: 8px 10px; background-color: #ffffff; border-radius: 4px; transition: all 0.3s ease; display: block; font-size: 13px; border: 1px solid #ffffff;">
+                        <span
+                            style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">20240445@novaims.unl.pt</span>
+                    </a>
                 </div>
-            </footer>
+            </div>
+        </div>
+
+        <!-- Copyright section -->
+        <div class="copyright"
+            style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ffffff; font-size: 13px; color: #ffffff; text-align: center;">
+            &copy; 2024 Culinaviz <span
+                style="display: inline-block; margin: 0 10px; font-size: 16px; color: #ffffff;">•</span>
+            Group 7 <span style="display: inline-block; margin: 0 10px; font-size: 16px; color: #ffffff;">•</span>
+            Data Visualization
+        </div>
+    </div>
+</footer>
         </main>
     </div>
     <!-- Include JavaScript resources -->
@@ -4337,62 +4580,7 @@
     </script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
-    <!-- Fix for section navigation -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize tooltip logic early
-            const tooltipMap = document.getElementById("tooltip-map");
-
-            // Helper function to show and position tooltip
-            window.showTooltip = function (event, content) {
-                if (tooltipMap) {
-                    tooltipMap.innerHTML = content;
-                    tooltipMap.style.opacity = "1";
-                    tooltipMap.style.transform = "scale(1)";
-                    tooltipMap.style.display = "block";
-                    tooltipMap.style.left = (event.pageX + 15) + "px";
-                    tooltipMap.style.top = (event.pageY - 15) + "px";
-                    console.log("Tooltip displayed at:", event.pageX, event.pageY);
-                } else {
-                    console.error("Tooltip element not found");
-                }
-            };
-
-            // Helper function to hide tooltip
-            window.hideTooltip = function () {
-                if (tooltipMap) {
-                    tooltipMap.style.opacity = "0";
-                    tooltipMap.style.transform = "scale(0.95)";
-                    tooltipMap.style.display = "none";
-                }
-            };
-
-            // Fix for the Cuisine Connections section navigation
-            const cuisineConnectionsLinks = document.querySelectorAll('a[href="#radial-chart-section"]');
-            cuisineConnectionsLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const radialSection = document.getElementById('radial-chart-section');
-                    if (radialSection) {
-                        radialSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // Fix for all section navigation for consistency
-            const allSectionLinks = document.querySelectorAll('nav a[href^="#"]');
-            allSectionLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-        }); // Esta chave fecha o document.addEventListener
-    </script>
+    
 
     <!-- Include the fix-maps.js script to handle tooltips more reliably -->
     <script src="fix-maps.js"></script>
