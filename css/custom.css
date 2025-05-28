@@ -2,11 +2,11 @@
 
 /* Change scrollUp button to orange-red (#e74c3c) */
 #scrollUp:before {
-    background: #e74c3c !important;
+    background: #000000 !important;
     /* Use !important to override any existing styles */
 }
 
 /* Also change hover state if needed */
 #scrollUp:hover:before {
-    background: #e74c3c !important;
+    background: #000000 !important;
 }
