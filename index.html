@@ -174,6 +174,12 @@
         .legend-section:last-child {
             margin-bottom: 0;
         }
+        #radial-tooltip {
+  position: absolute;    /* relativo ao container pai */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
 
         .legend-subtitle {
             font-size: 12px;
@@ -3988,21 +3994,68 @@
 
                                 const radiusScale = d3.scaleSqrt().domain([1, d3.max(nodes, d => d.count)]).range([5, 20]);
                                 const nodeMap = new Map(nodes.map(d => [d.id, d]));
-                                const linkScale = d3.scaleLinear().domain([1, d3.max(links, d => d.count)]).range([0.5, 2]);
-
+   
                                 const g = svg.append("g");
+                                // escala de largura da linha
+const linkScale = d3.scaleLinear()
+  .domain([1, d3.max(links, d => d.count)])
+  .range([0,5, 5]);  // de 1px até 5px
 
-                                g.selectAll("line")
-                                    .data(links)
-                                    .join("line")
-                                    .attr("x1", d => nodeMap.get(d.source).x)
-                                    .attr("y1", d => nodeMap.get(d.source).y)
-                                    .attr("x2", d => nodeMap.get(d.target).x)
-                                    .attr("y2", d => nodeMap.get(d.target).y)
-                                    .attr("stroke", "#E57373") // vermelho claro
-                                    .attr("stroke-width", d => linkScale(d.count))
-                                    .attr("stroke-opacity", 0.2)
-                                    .attr("class", "link");
+// --- desenha as linhas COM tooltip ---
+g.selectAll("line.link")
+  .data(links)
+  .join("line")
+    .attr("class", "link")
+    .attr("x1", d => nodeMap.get(d.source).x)
+    .attr("y1", d => nodeMap.get(d.source).y)
+    .attr("x2", d => nodeMap.get(d.target).x)
+    .attr("y2", d => nodeMap.get(d.target).y)
+    .attr("stroke", "#000")                    // preto
+    .attr("stroke-width", d => linkScale(d.count))
+    .attr("stroke-opacity", 0.2)
+  .on("mouseover", (event, d) => {
+    tooltip
+      .style("opacity", 1)
+      .html(`Co-ocorrências: <strong>${d.count.toLocaleString()}</strong>`)
+      .style("left",  (event.pageX + 8) + "px")
+      .style("top",   (event.pageY - 20) + "px");
+  })
+  .on("mousemove", event => {
+    tooltip
+      .style("left", (event.pageX + 8) + "px")
+      .style("top",  (event.pageY - 20) + "px");
+  })
+  .on("mouseout", () => {
+    tooltip.style("opacity", 0);
+  });
+
+
+                         // desenha as linhas
+g.selectAll("line")
+  .data(links)
+  .join("line")
+    .attr("x1", d => nodeMap.get(d.source).x)
+    .attr("y1", d => nodeMap.get(d.source).y)
+    .attr("x2", d => nodeMap.get(d.target).x)
+    .attr("y2", d => nodeMap.get(d.target).y)
+    .attr("stroke", "#555")                    // cinza escuro
+    .attr("stroke-width", d => linkScale(d.count))
+    .attr("stroke-opacity", 0.2)
+    .attr("class", "link")
+    .on("mouseover", (event, d) => {
+    tooltip.transition().duration(100).style("opacity", 0.9);
+    tooltip.html(`Co‐ocorrências: <strong>${d.count.toLocaleString()}</strong>`)
+      .style("left",  (event.pageX + 10) + "px")
+      .style("top",   (event.pageY - 20) + "px");
+  })
+  .on("mousemove", event => {
+    tooltip
+      .style("left", (event.pageX + 10) + "px")
+      .style("top",  (event.pageY - 20) + "px");
+  })
+  .on("mouseout", () => {
+    tooltip.transition().duration(100).style("opacity", 0);
+  });
 
                                 const node = g.selectAll("g")
                                     .data(nodes)
@@ -4015,7 +4068,7 @@
                                             .style("top", (event.pageY - 28) + "px");
 
                                         d3.select(this).select("circle")
-                                            .attr("stroke", "#D32F2F")
+                                            .attr("stroke", "#000000")
                                             .attr("stroke-width", 2);
                                     })
                                     .on("mouseout", function () {
@@ -4037,10 +4090,10 @@
                                             if (l.source === d.id) connected.add(l.target);
                                             if (l.target === d.id) connected.add(l.source);
                                         });
-
                                         g.selectAll(".link")
-                                            .attr("stroke-opacity", l => l.source === d.id || l.target === d.id ? 0.8 : 0.05)
-                                            .attr("stroke", l => l.source === d.id || l.target === d.id ? "#D32F2F" : "#E57373");
+   .attr("stroke-opacity", l => (l.source===d.id||l.target===d.id) ? 0.8 : 0.05)
+   .attr("stroke",         l => (l.source===d.id||l.target===d.id) ? "#555" : "#999");
+
 
                                         node.selectAll("circle")
                                             .attr("opacity", n => n.id === d.id || connected.has(n.id) ? 1 : 0.1);
@@ -4069,7 +4122,7 @@
                                 node.append("circle")
                                     .attr("r", d => radiusScale(d.count))
                                     .attr("fill", d => categoryColors[d.id] || "#ccc")
-                                    .attr("stroke", "#fff")
+                                    .attr("stroke", "#fffff")
                                     .attr("stroke-width", 0.5);
 
                                 svg.selectAll(".emoji-label")
@@ -4111,6 +4164,10 @@
                         });
                 });
             </script>
+
+
+
+
 <!-- Chord Diagram Section -->
 <section id="chord-section" class="scrollto clearfix" style="background:#FFFFFF; padding:60px 0;">
     <div class="row clearfix">
