@@ -73,10 +73,28 @@
         #tooltip,
         #tooltip-map,
         #tooltip-bubble,
+        #radial-tooltip,
+        #chord-tooltip,
         #globe-tooltip,
-        #globe-tooltip-fixed {
+        #globe-tooltip-fixed,
+        .viz-tooltip {
             font-family: 'Open Sans', sans-serif;
             font-size: 13px;
+        }
+
+        /* Estilo unificado para todos os tooltips */
+        .tooltip-common {
+            background: rgba(255, 255, 255, 0.98);
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            max-width: 280px;
+            line-height: 1.5em;
+            border: none;
         }
 
         /* Padronização de controles e botões */
